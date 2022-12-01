@@ -148,7 +148,7 @@ WHERE Building IS NULL;
 --2. List all movies and their ratings in percent
 --3. List all movies that were released on even number years
 
-SELECT Title, (Domestic_sales + International_sales) / POWER(10, 6) AS Sales_Millions FROM Movies
+SELECT Title, (Domestic_sales + International_sales) / 1_000_000 AS Sales_Millions FROM Movies
 LEFT JOIN Boxoffice ON Movies.Id = Boxoffice.Movie_id;
 
 SELECT Title, Rating*10 AS Rating_Perc FROM Movies
