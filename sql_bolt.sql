@@ -217,7 +217,7 @@ VALUES ('4', '8.7', '340_000_000', '370_000_000');
 
 UPDATE Movies
 SET Director = 'John Lasseter'
-WHERE Title="A Bug's Life";
+WHERE Title = "A Bug's Life";
 
 UPDATE Movies
 SET Year = '1999'
