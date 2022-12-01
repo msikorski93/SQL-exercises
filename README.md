@@ -1,2 +1,2 @@
 # SQL-exercises
-Solutions to tasks and exercises from different websites
+Solutions to tasks and exercises from different websites.
