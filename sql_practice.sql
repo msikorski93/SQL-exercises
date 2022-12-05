@@ -295,11 +295,11 @@ JOIN admissions ON patients.patient_id = admissions.patient_id;
 
 --Give each patient a 'Yes' if they have insurance, and a 'No' if they don't have insurance. Add up the admission_total cost for each has_insurance group.
 
-SELECT 'Yes' AS has_insurance, COUNT(*)*10 total_cost
+SELECT 'Yes' AS yes_insurance, COUNT(*) * 10 total_cost
 FROM admissions
 WHERE patient_id % 2 = 0
 UNION
-SELECT 'No' AS has_insurance, COUNT(*)*50 total_cost
+SELECT 'No' AS no_insurance, COUNT(*) * 50 total_cost
 FROM admissions
 WHERE patient_id % 2 != 0;
 
