@@ -129,7 +129,7 @@ HAVING COUNT(hd) >= 2;
 --Result set: model with the bigger number, model with the smaller number, speed, and RAM.
 
 SELECT DISTINCT t1.model, t2.model, t1.speed, t1.ram
-FROM pc t1, pc t2
+FROM pc AS t1, pc AS t2
 WHERE t1.model > t2.model
 AND t1.speed = t2.speed
 AND t1.ram = t2.ram;
@@ -140,7 +140,7 @@ AND t1.ram = t2.ram;
 --Result set: type, model, speed.
 
 SELECT DISTINCT p.type, l.model, l.speed
-FROM Product p, Laptop l
+FROM product AS p, laptop AS l
 WHERE p.model = l.model AND p.type = 'Laptop' AND l.speed < (SELECT MIN(speed) FROM pc);
 
 
@@ -148,9 +148,9 @@ WHERE p.model = l.model AND p.type = 'Laptop' AND l.speed < (SELECT MIN(speed) F
 --Find the makers of the cheapest color printers.
 --Result set: maker, price.
 
-SELECT DISTINCT Product.maker, Printer.price
-FROM Product, Printer
-WHERE Product.model = Printer.model AND Printer.color = 'y' AND Printer.Price = (SELECT MIN(Price) FROM Printer WHERE color = 'y');
+SELECT DISTINCT product.maker, printer.price
+FROM product, printer
+WHERE product.model = printer.model AND printer.color = 'y' AND printer.price = (SELECT MIN(price) FROM printer WHERE color = 'y');
 
 
 --Exercise: 19 (Serge I: 2003-02-13)
@@ -158,7 +158,7 @@ WHERE Product.model = Printer.model AND Printer.color = 'y' AND Printer.Price = 
 --Result set: maker, average screen size.
 
 SELECT maker, AVG(screen)
-FROM laptop l, product p
+FROM laptop AS l, product AS p
 WHERE l.model = p.model
 GROUP BY maker;
 
@@ -187,8 +187,7 @@ GROUP BY maker;
 --For each value of PC speed that exceeds 600 MHz, find out the average price of PCs with identical speeds.
 --Result set: speed, average price.
 
-SELECT speed, AVG(price)
-FROM pc
+SELECT speed, AVG(price) FROM pc
 WHERE speed > 600
 GROUP BY speed;
 
@@ -411,7 +410,7 @@ AND bat.date > b.date);
 --Get the makers who produce only one product type and more than one model. Output: maker, type.
 
 SELECT DISTINCT maker, type FROM product
-WHERE maker in
+WHERE maker IN
 (SELECT maker FROM product
 GROUP BY maker
-having COUNT(DISTINCT type) = 1 AND COUNT(model) > 1);
+HAVING COUNT(DISTINCT type) = 1 AND COUNT(model) > 1);
