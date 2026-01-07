@@ -260,9 +260,9 @@ Order by: weight
 SELECT
 name,
 weight,
-NTILE(2) OVER NTILE_WINDOW AS by_half,
+NTILE(2) OVER NTILE_WINDOW AS halfs,
 NTILE(3) OVER NTILE_WINDOW AS thirds,
-NTILE(4) OVER NTILE_WINDOW AS quart
+NTILE(4) OVER NTILE_WINDOW AS quarts
 FROM cats window NTILE_WINDOW AS (ORDER BY weight)
 ORDER BY weight, name;
 
