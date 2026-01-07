@@ -151,7 +151,7 @@ WHERE Building IS NULL;
 SELECT Title, (Domestic_sales + International_sales) / 1_000_000 AS Sales_Millions FROM Movies
 LEFT JOIN Boxoffice ON Movies.Id = Boxoffice.Movie_id;
 
-SELECT Title, Rating*10 AS Rating_Perc FROM Movies
+SELECT Title, Rating * 10 AS Rating_Perc FROM Movies
 LEFT JOIN Boxoffice ON Movies.Id = Boxoffice.Movie_id;
 
 SELECT * FROM Movies WHERE Year % 2 = 0;
@@ -194,13 +194,13 @@ HAVING Role = 'Engineer';
 SELECT COUNT(Director) AS Num, Director FROM Movies
 GROUP BY Director;
 
-SELECT DISTINCT Director, (Domestic_sales + International_sales) AS Total_Sales FROM Movies
-LEFT JOIN Boxoffice ON Movies.Id = Boxoffice.Movie_id
+SELECT DISTINCT Director, SUM(Domestic_sales + International_sales) AS Total_Sales FROM Movies
+INNER JOIN Boxoffice ON Movies.Id = Boxoffice.Movie_id
 GROUP BY Director;
 
 --Exercise 13 — Tasks
 
---1. Add the studio's new production, Toy Story 4 to the list of movies (you can use any director) ✓
+--1. Add the studio's new production, Toy Story 4 to the list of movies (you can use any director)
 --2. Toy Story 4 has been released to critical acclaim! It had a rating of 8.7, and made 340 million domestically and 270 million internationally. Add the record to the BoxOffice table.
 
 INSERT INTO Movies (Id, Title, Director, Year, length_minutes)
