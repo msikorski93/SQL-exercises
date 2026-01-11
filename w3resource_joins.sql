@@ -74,7 +74,12 @@ natural join salesman as s;
 --8. Customer & Salesman Sorted by Customer_ID
 --From the following tables write a SQL query to display the customer name, customer city, grade, salesman, salesman city. The results should be sorted by ascending customer_id.
 
-select c.cust_name, c.city, c.grade, s.name, s.city
+select
+c.cust_name,
+c.city,
+c.grade,
+s.name,
+s.city
 from customer as c
 inner join salesman as s
 on c.salesman_id = s.salesman_id
@@ -129,7 +134,10 @@ on c.salesman_id = s.salesman_id;
 --12. Salespersons List (Including Unassigned)
 --Write a SQL statement to generate a list in ascending order of salespersons who work either for one or more customers or have not yet joined any of the customers.
 
-select s.name, s.city, s.salesman_id
+select
+s.name,
+s.city,
+s.salesman_id
 from salesman as s
 right join customer as c
 on s.salesman_id = c.salesman_id
@@ -154,7 +162,11 @@ on o.customer_id = c.customer_id;
 --14. Salesmen List with Order and Grade Criteria
 --Write a SQL statement to make a list for the salesmen who either work for one or more customers or yet to join any of the customer. The customer may have placed, either one or more orders on or above order amount 2000 and must have a grade, or he may not have placed any order to the associated supplier.
 
-select s.name, c.cust_name, o.purch_amt, c.grade
+select
+s.name,
+c.cust_name,
+o.purch_amt,
+c.grade
 from salesman as s
 right join customer as c
 on s.salesman_id = c.salesman_id
@@ -194,14 +206,14 @@ where c.grade is not null;
 --Write a SQL query to combine each row of the salesman table with each row of the customer table.
 
 select s.*, c.*
-from salesman as
+from salesman as s
 cross join customer as c;
 
 --18. Cartesian Product with City Flag
 --Write a SQL statement to create a Cartesian product between salesperson and customer, i.e. each salesperson will appear for all customers and vice versa for that salesperson who belongs to that city.
 
 select s.*, c.*
-from salesman as
+from salesman as s
 cross join customer as c
 where s.city is not null;
 
@@ -209,7 +221,7 @@ where s.city is not null;
 --Write a SQL statement to create a Cartesian product between salesperson and customer, i.e. each salesperson will appear for every customer and vice versa for those salesmen who belong to a city and customers who require a grade.
 
 select s.*, c.*
-from salesman as
+from salesman as s
 cross join customer as c
 where s.city is not null
 and c.grade is not null;
@@ -218,7 +230,7 @@ and c.grade is not null;
 --Write a SQL statement to make a Cartesian product between salesman and customer i.e. each salesman will appear for all customers and vice versa for those salesmen who must belong to a city which is not the same as his customer and the customers should have their own grade.
 
 select s.*, c.*
-from salesman as
+from salesman as s
 cross join customer as c
 where s.city is not null
 and s.city != c.city
@@ -318,9 +330,11 @@ where dep.dpt_allotment > 50000;
 --29. Departments with More Than Two Employees
 --From the following tables write a SQL query to find the names of departments where more than two employees are employed. Return dpt_name.
 
-select dep.dpt_name
+select
+dep.dpt_name,
+count(*) as emp_count
 from emp_department as dep
-inner emp_details as det
+inner join emp_details as det
 on det.emp_dept = dep.dpt_code
 group by dep.dpt_name
 having count(*) > 2;
