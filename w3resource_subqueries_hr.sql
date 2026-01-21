@@ -661,7 +661,7 @@ group by j.employee_id
 having count(j.employee_id) >= 1)
 
 group by e.department_id
-having max(e.salary) >= 7000);
+having max(e.salary) >= 7000.0);
 
 --or
 
@@ -672,7 +672,7 @@ on d.department_id = e.department_id
 inner join job_history as j
 on e.employee_id = j.employee_id
 group by d.department_id
-having max(e.salary) >= 7000;
+having max(e.salary) >= 7000.0;
 
 --49. From the following tables, write a SQL query to find those departments where the starting salary is at least 8000. Return all the fields of departments.
 
@@ -684,7 +684,7 @@ where e.department_id in
 (select e.department_id
 from employees
 group by e.department_id
-having min(e.salary) >= 8000);
+having min(e.salary) >= 8000.0);
 
 --or
 
@@ -693,7 +693,7 @@ from d.departments as d
 inner join employees as e
 on d.department_id = e.department_id
 group by d.department_id
-having min(e.salary) >= 8000;
+having min(e.salary) >= 8000.0;
 
 --50. From the following table, write a SQL query to find those managers who supervise four or more employees. Return manager name, department ID.
 
